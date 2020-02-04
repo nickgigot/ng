@@ -1,0 +1,36 @@
+<html>
+    <head> 
+        <title>My First Leaflet Map</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+        integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+        integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+        crossorigin=""></script>
+        <script src="/Users/ngigot/Desktop/GEOG456/old/old_well_4326.geojson"></script>
+    </head>
+    <body>
+    This is not as hard as I thought 
+    </body>
+    <div id="mapid"></div>
+    <style>
+        #mapid{ width: 900px; height: 500px; }
+    </style>
+    <script>
+    var map = L.map('mapid').setView([35.91, -79.05], 17);
+    var uncIcon = L.icon({
+        iconUrl: 'old/OldWell.png',
+        iconSize: [50,50],
+        popupAnchor: [0,0]
+    });
+    var customPopup = "UNC Well<br/><imgsrc='https://static1.squarespace.com/static/57d17e77b8a79bfa4e31641d/t/58a22fd0bebafb516ad2404a/1487024089479/unc+well.png?format=1500w' width='100px'/>";
+    L.geoJSON(uncwell).addTo(map)
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.marker([35.911271, -79.049807]).addTo(map).bindPopup('Hey I am at Carolina Hall 322').openPopup();
+    L.geoJSON(uncwell, {
+    pointToLayer: function (feature, latlng) {
+    return L.marker(latlng, {icon: uncIcon});}})
+    .bindPopup(customPopup)
+    .addTo(map)
+    </script>
+</html>
